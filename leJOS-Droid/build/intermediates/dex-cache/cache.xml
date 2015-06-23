@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="C:\Users\leo\leJOS-Droid\leJOS-Droid\libs\pccomm.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="23be9505ddf58540529d00a725bee2cae801a314">
+        <dex dex="C:\Users\leo\leJOS-Droid\leJOS-Droid\build\intermediates\pre-dexed\debug\pccomm-7315437f1925dedc96367896db411ba75daf5402.jar" />
+    </item>
+
+</items>

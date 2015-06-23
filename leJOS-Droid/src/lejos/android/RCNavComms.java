@@ -4,8 +4,6 @@ package lejos.android;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -24,15 +22,12 @@ public class RCNavComms
 {
 	Handler mUIMessageHandler;
     private String TAG="RCNavComms";
-  /**
-   * constructor establishes  call back path of the RCNavigationControl
- * @param mUIMessageHandler 
-   * @param control
-   */
-  public RCNavComms(Handler mUIMessageHandler)
+    private Reader reader = new Reader();
+
+  public RCNavComms(Handler uiMessageHandler)
   {
-    Log.d(TAG," RCNavComms start");
-    this.mUIMessageHandler=mUIMessageHandler;
+    mUIMessageHandler = uiMessageHandler;
+    Log.d(TAG," RCNavComms sendData");
   }
 
   /**
@@ -59,102 +54,18 @@ public class RCNavComms
       connected = false;
       return connected;
     }
-    if (!reader.isRunning)
-    {
-      reader.start();
-    }
+      if (!reader.isRunning)
+      {
+          reader.start();
+      }
     return connected;
   }
   
-  
 
-  /**
-   * inner class to monitor for an incoming message after a command has been sent <br>
-   * calls showRobotPosition() on the controller
-   */
-  class Reader extends Thread
-  {
+  private long lasttime = 0;
+    private float[] data = {0,0,0,0};
+    private static final int delay = 100;
 
-    public boolean reading = false;
-    int count = 0;
-    boolean isRunning = false;
-    public void run()
-    {
-    	setName("RCNavComms read thread");
-      isRunning = true;
-      while (isRunning)
-      {
-        if (reading)  //reads one message at a time
-        {
-         Log.d(TAG,"reading ");
-          float x = 0;
-          float y = 0;
-          float h = 0;
-          boolean ok = false;
-          try
-          {
-            x = dataIn.readFloat();
-            y = dataIn.readFloat();
-            h = dataIn.readFloat();
-            ok = true;
-           Log.d(TAG,"data  " + x + " " + y + " " + h);
-          } catch (IOException e)
-          {
-           Log.d(TAG,"connection lost");
-            count++;
-            isRunning = count < 20;// give up
-            ok = false;
-          }
-          if (ok)
-          {
-        	 sendPosToUIThread(x, y, h);
-            reading = false;
-          }
-          try
-          {
-            Thread.sleep(50);
-          } catch (InterruptedException ex)
-          {
-            Logger.getLogger(RCNavComms.class.getName()).log(Level.SEVERE, null, ex);
-          }
-        }
-      }// if reading
-      Thread.yield();
-    }//while is running
-    
- 
-  }
-  
-   void end(){
-	  reader.isRunning=false;
-  }
-/**
- * sends a command with a variable number of float parameters.
- *  see http://java.sun.com/docs/books/tutorial/java/javaOO/arguments.html
- * the section on Arbitrary Number of Arguments
- * @param c a Command enum
- * @param data  an array of floats built from the collection list parameters.
- */
-  public void send(Command c, float... data)
-  {
-    while(reader.reading)
-    {
-      Thread.yield();
-    }
-    try
-    {
-      dataOut.writeInt(c.ordinal());  // convert the enum to an integer
-      for (float d : data)  // iterate over the   data   array
-      {
-        dataOut.writeFloat(d);
-      }
-      dataOut.flush();
-    } catch (IOException e)
-    {
-     Log.e(TAG," send throws exception  ", e);
-    }
-    reader.reading = true;  //reader: listen for response
-  }
   /**
    * used by reader
    */
@@ -163,20 +74,90 @@ public class RCNavComms
    * used by send()
    */
   private DataOutputStream dataOut;
-  private Reader reader = new Reader();
   private NXTConnector connector;
   public NXTConnector getConnector() {
 	return connector;
 }
 
-  public void sendPosToUIThread(float x, float y, float h) {
-  	float[] pos= {x,y,h};
-  	Bundle b = new Bundle();
-  	b.putFloatArray(RCNavigationControl.ROBOT_POS, pos);
-  	Message message_holder = new Message();
-		message_holder.setData(b);
-		mUIMessageHandler.sendMessage(message_holder);
-	}
-  
-  
+    public void setData(float[] data) {
+        this.data = data;
+    }
+
+    class Reader extends Thread
+    {
+        public boolean reading = false;
+        int count = 0;
+        boolean isRunning = false;
+        public void run()
+        {
+            setName("RCNavComms read thread");
+            isRunning = true;
+            while (isRunning)
+            {
+                if (reading)  //reads one message at a time
+                {
+                    Log.d(TAG,"reading ");
+                    int status = 0;
+                    int speed = 0;
+                    boolean ok = false;
+                    try
+                    {
+                        status = dataIn.readInt();
+                        speed = dataIn.readInt();
+                        ok = true;
+                        Log.d(TAG,"data  " + status + " " + speed);
+                    } catch (IOException e)
+                    {
+                        Log.d(TAG,"connection lost");
+                        count++;
+                        isRunning = count < 20;// give up
+                        ok = false;
+                    }
+                    if (ok)
+                    {
+                        sendDataUIThread(status, speed);
+                        reading = false;
+                    }
+                    try
+                    {
+                        Thread.sleep(50);
+                    } catch (InterruptedException ex)
+                    {
+                        Log.d(RCNavComms.class.getName(), ex.getMessage());
+                    }
+                } else {
+                    //send data and set to null
+                    if( data != null) {
+                        try {
+                            for (float f : data)  // iterate over the   data   array
+                            {
+                                dataOut.writeFloat(f);
+                            }
+                            dataOut.flush();
+                            data = null;
+                        }catch(IOException e) {
+                            Log.e(TAG, " send throws exception  ", e);
+                        }
+                        reader.reading = true;
+                    }
+                }
+            }
+        }//while is running
+
+
+    }
+
+    public void sendDataUIThread(int status, int speed) {
+        int[] data= {status, speed};
+        Bundle b = new Bundle();
+        b.putIntArray(RCNavigationControl.ROBOT_STATUS, data);
+        Message message_holder = new Message();
+        message_holder.what = RCNavigationControl.ROBOT_STATUS_CODE;
+        message_holder.setData(b);
+        mUIMessageHandler.sendMessage(message_holder);
+    }
+
+    void end(){
+        reader.isRunning=false;
+    }
 }

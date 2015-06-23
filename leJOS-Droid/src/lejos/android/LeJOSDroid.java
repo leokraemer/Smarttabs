@@ -121,8 +121,6 @@ public class LeJOSDroid extends Activity {
 		setContentView(R.layout.main);
 		_message = (TextView) findViewById(R.id.messageText);
 		seupNXJCache();
-		setupTachoCount(this);
-		setupBTSend(this);
 		setupRCNavigationControl(this);
 		reusableToast = Toast.makeText(this, "", Toast.LENGTH_SHORT);
 	}
@@ -175,24 +173,6 @@ public class LeJOSDroid extends Activity {
 				Intent RCNavigationControl = new Intent(leJOSDroid, lejos.android.RCNavigationControl.class);
 				startActivity(RCNavigationControl);
 			}
-		});
-	}
-
-	private void setupTachoCount(final LeJOSDroid mActivity) {
-		Button button = (Button) findViewById(R.id.button1);
-
-		button.setOnClickListener(new View.OnClickListener() {
-
-			public void onClick(View arg0) {
-				try {
-					tachoCount = new TachoCount();
-					_message.setVisibility(View.INVISIBLE);
-					tachoCount.start();
-				} catch (Exception e) {
-					Log.e(TAG, "failed to run TachoCount:" + e.getMessage(), e);
-				}
-			}
-
 		});
 	}
 
