@@ -63,6 +63,8 @@ public class RCNavComms
   
 
     private float[] data = {0,0,0,0};
+    private Float linacc = 0f;
+    private int commandCode = 0;
 
   /**
    * used by communicator
@@ -77,9 +79,17 @@ public class RCNavComms
 	return connector;
 }
 
-    public void setData(float[] data) {
-         synchronized (this){
+    public void setData(int commandCode, float[] data) {
+        synchronized (this){
+            this.commandCode = commandCode;
             this.data = data;
+        }
+    }
+
+    public void setData(int commandCode, float linacc) {
+        synchronized (this){
+            this.commandCode = commandCode;
+            this.linacc = linacc;
         }
     }
 
@@ -128,8 +138,9 @@ public class RCNavComms
                 } else {
                     //send data and set to null
                     synchronized (this) {
-                        if (data != null) {
+                        if (commandCode == Codes.Command.DRIVE.value && data != null) {
                             try {
+                                dataOut.writeInt(commandCode);
                                 for (float f : data)  // iterate over the   data   array
                                 {
                                     dataOut.writeFloat(f);
@@ -140,7 +151,16 @@ public class RCNavComms
                                 Log.e(TAG, " send throws exception  ", e);
                             }
                             communicator.reading = true;
-                        } else {
+                        } else if(commandCode == Codes.Command.LIFTINGARM.value && linacc != null){
+                            try {
+                                dataOut.writeInt(commandCode);
+                                dataOut.writeFloat(linacc);
+                                dataOut.flush();
+                                linacc = null;
+                            } catch (IOException e) {
+                                Log.e(TAG, " send throws exception  ", e);
+                            }
+                        } else{
                             try {
                                 Thread.sleep(50);
                             } catch (InterruptedException ex) {

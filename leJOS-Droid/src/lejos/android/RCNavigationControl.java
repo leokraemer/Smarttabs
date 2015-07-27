@@ -30,6 +30,8 @@ public class RCNavigationControl extends Activity implements SeekBar.OnSeekBarCh
 	private ConnectThread mConnectThread;
 	private SeekBar rotation;
 	private SeekBar speed;
+	private SeekBar linacc;
+
 	private TextView speedTextView;
 	private ImageView knob;
 	private FrameLayout gamepad;
@@ -55,11 +57,13 @@ public class RCNavigationControl extends Activity implements SeekBar.OnSeekBarCh
 	public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 		if(seekBar == rotation) {
 			data[3] = (((float) rotation.getProgress() - (float) rotation.getMax() / 2f)) / ((float) rotation.getMax() / 2f);
-			communicator.setData(data);
+			communicator.setData(Codes.Command.DRIVE.value, data);
 		} else if(seekBar == speed){
 			data[0] = (float) seekBar.getProgress();
 			speedTextView.setText(Float.toString(data[0]));
-			communicator.setData(data);
+			communicator.setData(Codes.Command.DRIVE.value, data);
+		} else if(seekBar == linacc){
+			communicator.setData(Codes.Command.LIFTINGARM.value, (float)progress);
 		}
 	}
 
@@ -73,7 +77,7 @@ public class RCNavigationControl extends Activity implements SeekBar.OnSeekBarCh
 		if(seekBar == rotation) {
 			rotation.setProgress((int) ((float) rotation.getMax() / 2f));
 			data[3] = 0f;
-			communicator.setData(data);
+			communicator.setData(Codes.Command.DRIVE.value, data);
 		}
 	}
 
@@ -92,7 +96,7 @@ public class RCNavigationControl extends Activity implements SeekBar.OnSeekBarCh
 						knob.requestLayout();
 						data[1] = 0f;
 						data[2] = 0f;
-						communicator.setData(data);
+						communicator.setData(Codes.Command.DRIVE.value, data);
 					}
 					if (event.getAction() == MotionEvent.ACTION_MOVE || event.getAction() == MotionEvent.ACTION_DOWN) {
 						((FrameLayout.LayoutParams) knob.getLayoutParams()).gravity = Gravity.LEFT + Gravity.TOP;
@@ -118,7 +122,7 @@ public class RCNavigationControl extends Activity implements SeekBar.OnSeekBarCh
 						Log.d("vx", Float.toString(data[1]));
 						Log.d("vy", Float.toString(data[2]));
 						knob.requestLayout();
-						communicator.setData(data);
+						communicator.setData(Codes.Command.DRIVE.value, data);
 					}
 				return true;
 			}
@@ -175,6 +179,8 @@ public class RCNavigationControl extends Activity implements SeekBar.OnSeekBarCh
 		rotation.setOnSeekBarChangeListener(this);
 		gamepad = (FrameLayout) findViewById(R.id.gamepad);
 		knob = (ImageView) gamepad.findViewById(R.id.knob);
+		linacc = (SeekBar) findViewById(R.id.linaccSlider);
+		linacc.setOnSeekBarChangeListener(this);
 		speed = (SeekBar) findViewById(R.id.speedSlider);
 		speed.setOnSeekBarChangeListener(this);
 		speedTextView = (TextView) findViewById(R.id.speedTextView);
