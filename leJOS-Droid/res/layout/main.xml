@@ -11,17 +11,8 @@
 	    android:textAppearance="?android:attr/textAppearanceMedium"
     	android:layout_marginTop="10dip"
     	android:layout_marginBottom="10dip"
-    	/>
-	<Button android:id="@+id/button1"
-		android:text="@string/test_1"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"/>
-		
-	<Button android:id="@+id/button2"
-		android:text="@string/test_2"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content" />
-		
+		android:id="@+id/hello" />
+
 	<Button android:id="@+id/button3"
 		android:text="@string/test_3"
 		android:layout_width="fill_parent"

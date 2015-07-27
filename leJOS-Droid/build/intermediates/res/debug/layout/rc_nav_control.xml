@@ -15,7 +15,8 @@
 			android:max="1000"
 			android:layout_alignParentTop="true"
 			android:layout_alignParentEnd="true"
-			android:thumb="@drawable/controllermitte"/>
+			android:thumb="@drawable/controllermitte"
+			android:maxHeight="75dp" />
 
 
 	<TextView
@@ -89,4 +90,4 @@
 		android:layout_alignTop="@+id/nxt24"
 		android:layout_toEndOf="@+id/nxt24" />
 
-</RelativeLayout><!-- From: file:/C:/Users/leo/leJOS-Droid/leJOS-Droid/res/layout/rc_nav_control.xml -->
+</RelativeLayout><!-- From: file:/C:/Users/leo/Android%20Studio%20Projects/Smatttabs/leJOS-Droid/res/layout/rc_nav_control.xml -->

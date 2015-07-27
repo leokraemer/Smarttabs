@@ -22,7 +22,7 @@ public class RCNavComms
 {
 	Handler mUIMessageHandler;
     private String TAG="RCNavComms";
-    private Reader reader = new Reader();
+    private Communicator communicator = new Communicator();
 
   public RCNavComms(Handler uiMessageHandler)
   {
@@ -54,20 +54,18 @@ public class RCNavComms
       connected = false;
       return connected;
     }
-      if (!reader.isRunning)
+      if (!communicator.isRunning)
       {
-          reader.start();
+          communicator.start();
       }
     return connected;
   }
   
 
-  private long lasttime = 0;
     private float[] data = {0,0,0,0};
-    private static final int delay = 100;
 
   /**
-   * used by reader
+   * used by communicator
    */
   private DataInputStream dataIn;
   /**
@@ -80,10 +78,12 @@ public class RCNavComms
 }
 
     public void setData(float[] data) {
-        this.data = data;
+         synchronized (this){
+            this.data = data;
+        }
     }
 
-    class Reader extends Thread
+    class Communicator extends Thread
     {
         public boolean reading = false;
         int count = 0;
@@ -127,24 +127,30 @@ public class RCNavComms
                     }
                 } else {
                     //send data and set to null
-                    if( data != null) {
-                        try {
-                            for (float f : data)  // iterate over the   data   array
-                            {
-                                dataOut.writeFloat(f);
+                    synchronized (this) {
+                        if (data != null) {
+                            try {
+                                for (float f : data)  // iterate over the   data   array
+                                {
+                                    dataOut.writeFloat(f);
+                                }
+                                dataOut.flush();
+                                data = null;
+                            } catch (IOException e) {
+                                Log.e(TAG, " send throws exception  ", e);
                             }
-                            dataOut.flush();
-                            data = null;
-                        }catch(IOException e) {
-                            Log.e(TAG, " send throws exception  ", e);
+                            communicator.reading = true;
+                        } else {
+                            try {
+                                Thread.sleep(50);
+                            } catch (InterruptedException ex) {
+                                Log.d(RCNavComms.class.getName(), ex.getMessage());
+                            }
                         }
-                        reader.reading = true;
                     }
                 }
             }
         }//while is running
-
-
     }
 
     public void sendDataUIThread(int status, int speed) {
@@ -158,6 +164,6 @@ public class RCNavComms
     }
 
     void end(){
-        reader.isRunning=false;
+        communicator.isRunning=false;
     }
 }

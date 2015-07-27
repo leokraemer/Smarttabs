@@ -48,9 +48,6 @@ public class LeJOSDroid extends Activity {
 	public static final String MESSAGE_CONTENT = "String_message";
 	public static final int MESSAGE = 1000;
 	public static final int TOAST = 2000;
-	private BTSend btSend;
-
-	private TachoCount tachoCount;
 
 	private Toast reusableToast;
 
@@ -92,24 +89,12 @@ public class LeJOSDroid extends Activity {
 
 	}
 
-	public static void displayToastOnUIThread(String message) {
-		Message message_holder = formMessage(message);
-		message_holder.what = LeJOSDroid.TOAST;
-		mUIMessageHandler.sendMessage(message_holder);
-	}
-
 	private static Message formMessage(String message) {
 		Bundle b = new Bundle();
 		b.putString(LeJOSDroid.MESSAGE_CONTENT, message);
 		Message message_holder = new Message();
 		message_holder.setData(b);
 		return message_holder;
-	}
-
-	public static void sendMessageToUIThread(String message) {
-		Message message_holder = formMessage(message);
-		message_holder.what = LeJOSDroid.MESSAGE;
-		mUIMessageHandler.sendMessage(message_holder);
 	}
 
 	/** Called when the activity is first created. */
@@ -128,39 +113,11 @@ public class LeJOSDroid extends Activity {
 	@Override
 	protected void onPause() {
 		super.onPause();
-
-		if (btSend != null) {
-			Log.d(TAG, "onPause() closing btSend ");
-			btSend.closeConnection();
-			btSend = null;
-		}
-
-		if (tachoCount != null) {
-			Log.d(TAG, "onPause() closing btSend ");
-			tachoCount.closeConnection();
-		}
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
-	}
-
-	private void setupBTSend(final LeJOSDroid leJOSDroid) {
-		Button button;
-		button = (Button) findViewById(R.id.button2);
-		button.setOnClickListener(new View.OnClickListener() {
-
-			public void onClick(View arg0) {
-				try {
-					btSend = new BTSend(mUIMessageHandler);
-					btSend.start();
-				} catch (Exception e) {
-					Log.e(TAG, "failed to run BTSend:" + e.getMessage(), e);
-				}
-
-			}
-		});
 	}
 
 	private void setupRCNavigationControl(final LeJOSDroid leJOSDroid) {
@@ -169,7 +126,6 @@ public class LeJOSDroid extends Activity {
 		button.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View arg0) {
-
 				Intent RCNavigationControl = new Intent(leJOSDroid, lejos.android.RCNavigationControl.class);
 				startActivity(RCNavigationControl);
 			}

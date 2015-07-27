@@ -198,6 +198,8 @@ public class RCNavigationControl extends Activity implements SeekBar.OnSeekBarCh
 		super.onPause();
 		try {
 			communicator.getConnector().close();
+			communicator.end();
+			communicator = null;
 		} catch (Exception e) {
 			Log.e(TAG, "onPause() error closing NXTComm ", e);
 		}

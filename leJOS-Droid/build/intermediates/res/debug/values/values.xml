@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/C:/Users/leo/leJOS-Droid/leJOS-Droid/res/values/strings.xml -->
+    <!-- From: file:/C:/Users/leo/Android%20Studio%20Projects/Smatttabs/leJOS-Droid/res/values/strings.xml -->
     <eat-comment/>
     <string name="address_label">Address</string>
     <string name="app_name">leJOS-Droid</string>
@@ -11,7 +11,7 @@
     <string name="connect_tab">Connect</string>
     <string name="goto_button">GoTo XY</string>
     <string name="heading_label">   Heading:</string>
-    <string name="hello">こにちは</string>
+    <string name="hello">Hello</string>
     <string name="name_label">Name</string>
     <string name="none_found">No devices found</string>
     <string name="none_paired">No devices have been paired</string>

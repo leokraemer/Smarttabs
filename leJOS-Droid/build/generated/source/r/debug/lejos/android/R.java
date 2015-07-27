@@ -16,20 +16,19 @@ public final class R {
         public static final int icon=0x7f020002;
     }
     public static final class id {
-        public static final int button1=0x7f060000;
-        public static final int button2=0x7f060001;
-        public static final int button3=0x7f060002;
-        public static final int gamepad=0x7f060007;
-        public static final int knob=0x7f060008;
-        public static final int mMessage=0x7f060006;
-        public static final int messageText=0x7f060003;
-        public static final int nxt24=0x7f06000c;
-        public static final int root=0x7f060004;
-        public static final int speedSlider=0x7f060009;
-        public static final int speedTextView=0x7f06000b;
-        public static final int textView=0x7f06000a;
-        public static final int vl=0x7f060005;
-        public static final int winetittler=0x7f06000d;
+        public static final int button3=0x7f060001;
+        public static final int gamepad=0x7f060006;
+        public static final int hello=0x7f060000;
+        public static final int knob=0x7f060007;
+        public static final int mMessage=0x7f060005;
+        public static final int messageText=0x7f060002;
+        public static final int nxt24=0x7f06000b;
+        public static final int root=0x7f060003;
+        public static final int speedSlider=0x7f060008;
+        public static final int speedTextView=0x7f06000a;
+        public static final int textView=0x7f060009;
+        public static final int vl=0x7f060004;
+        public static final int winetittler=0x7f06000c;
     }
     public static final class layout {
         public static final int main=0x7f030000;

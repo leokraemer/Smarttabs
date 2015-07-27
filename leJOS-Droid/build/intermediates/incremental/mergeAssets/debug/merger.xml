@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="C:\Users\leo\leJOS-Droid\leJOS-Droid\assets"/></dataSet><dataSet config="debug"><source path="C:\Users\leo\leJOS-Droid\leJOS-Droid\build-types\debug\assets"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="C:\Users\leo\Android Studio Projects\Smatttabs\leJOS-Droid\assets"/></dataSet><dataSet config="debug"><source path="C:\Users\leo\Android Studio Projects\Smatttabs\leJOS-Droid\build-types\debug\assets"/></dataSet></merger>
