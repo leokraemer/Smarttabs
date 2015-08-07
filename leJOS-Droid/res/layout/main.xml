@@ -4,17 +4,13 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     >
-	<TextView  
-	    android:layout_width="fill_parent" 
-	    android:layout_height="wrap_content" 
-	    android:text="@string/hello"
-	    android:textAppearance="?android:attr/textAppearanceMedium"
-    	android:layout_marginTop="10dip"
-    	android:layout_marginBottom="10dip"
-		android:id="@+id/hello" />
+	<Button android:id="@+id/RobotOnNXT"
+		android:text="Robot on NXT"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content" />
 
-	<Button android:id="@+id/button3"
-		android:text="@string/test_3"
+	<Button android:id="@+id/RemoteControl"
+		android:text="Remote Control"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content" />
 	<TextView  

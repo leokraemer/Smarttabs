@@ -8,5 +8,12 @@
         sha1="23be9505ddf58540529d00a725bee2cae801a314">
         <dex dex="C:\Users\leo\Android Studio Projects\Smatttabs\leJOS-Droid\build\intermediates\pre-dexed\debug\pccomm-41c2205733b9e16143ebf1a9589cb01cf8bbc6c2.jar" />
     </item>
+    <item
+        jar="C:\Users\leo\Android Studio Projects\Smatttabs\leJOS-Droid\libs\protocolreader.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="bcaf14bb2584781da84de5b875d3628c65654840">
+        <dex dex="C:\Users\leo\Android Studio Projects\Smatttabs\leJOS-Droid\build\intermediates\pre-dexed\debug\protocolreader-21c611d799d18918516f4a6b2126717b2e272458.jar" />
+    </item>
 
 </items>

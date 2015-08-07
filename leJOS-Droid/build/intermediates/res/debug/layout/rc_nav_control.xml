@@ -1,100 +1,271 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="match_parent" android:layout_height="match_parent"
-	android:id="@+id/root">
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-		<SeekBar
-            android:layout_width="300dp"
+    <SeekBar
+        android:id="@+id/turn"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_column="1"
+        android:layout_weight="1"
+        android:indeterminate="false"
+        android:max="1000"
+        android:maxHeight="75dp"
+        android:padding="20dp"
+        android:progress="500"
+        android:thumb="@drawable/controllermittesmall"
+        android:splitTrack="true"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentEnd="true" />
+
+    <FrameLayout
+        android:id="@+id/gamepad"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/controllerrand">
+
+        <ImageView
+            android:id="@+id/knob"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/vl"
-			android:layout_column="1"
-			android:layout_weight="1"
-			android:progress="500"
-			android:padding="20dp"
-			android:indeterminate="false"
-			android:max="1000"
-			android:layout_alignParentTop="true"
-			android:layout_alignParentEnd="true"
-			android:thumb="@drawable/controllermitte"
-			android:maxHeight="75dp" />
+            android:layout_gravity="center"
+            android:background="@drawable/controllermittesmall" />
+    </FrameLayout>
+
+    <SeekBar
+        android:id="@+id/speedSlider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/gamepad"
+        android:layout_alignEnd="@+id/gamepad"
+        android:indeterminate="false"
+        android:max="1500"
+        android:progress="1000" />
+
+    <TextView
+        android:id="@+id/speedTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/speedSlider"
+        android:layout_alignParentStart="true"
+        android:text="1000"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lifting Arm"
+            android:layout_above="@+id/textView4"
+            android:layout_alignStart="@+id/turn" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Position"
+            android:layout_alignTop="@+id/gamepad"
+            android:layout_alignStart="@+id/linaccspeedslider" />
+
+        <TextView
+            android:id="@+id/linactext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0%"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_above="@+id/linaccspeedslider"
+            android:layout_alignStart="@+id/linaccspeedslider" />
+
+        <SeekBar
+            android:id="@+id/linaccspeedslider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:indeterminate="false"
+            android:max="100"
+            android:progress="100"
+            android:layout_above="@+id/gamepad"
+            android:layout_alignStart="@+id/turn" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Power"
+            android:layout_above="@+id/linactext"
+            android:layout_alignStart="@+id/linactext" />
+
+        <TextView
+            android:id="@+id/linacspeedtext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_below="@+id/textView3"
+            android:layout_toEndOf="@+id/mMessage" />
+
+        <SeekBar
+            android:id="@+id/linaccSlider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:indeterminate="false"
+            android:max="100"
+            android:thumb="@drawable/controllermittesmall"
+            android:layout_below="@+id/linacspeedtext"
+            android:layout_alignParentEnd="true"
+            android:layout_alignStart="@+id/textView" />
 
 
-	<TextView
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:textAppearance="?android:attr/textAppearanceLarge"
-			android:text="Large Text"
-			android:id="@+id/mMessage"
-			android:padding="20dp"
-			android:layout_gravity="top"
-			android:layout_column="1"
-			android:layout_alignParentBottom="true"
-		android:layout_alignParentEnd="false" />
+    <Button
+        android:id="@+id/nxt24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toStartOf="@+id/winetittler"
+        android:text="Connect to NXT24" />
 
-	<FrameLayout
-		android:layout_width="300dp"
-		android:layout_height="300dp"
-		android:layout_alignParentTop="true"
-		android:background="@drawable/controllerrand"
-		android:id="@+id/gamepad">
+    <Button
+        android:id="@+id/winetittler"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/nxt24"
+        android:layout_centerInParent="true"
+        android:text="WineTittler"
+        android:visibility="invisible" />
 
-		<ImageView
-			android:layout_width="75dp"
-			android:layout_height="75dp"
-			android:id="@+id/knob"
-			android:layout_gravity="center"
-			android:background="@drawable/controllermitte" />
-	</FrameLayout>
+    <Button
+        android:id="@+id/resetliftingarm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/nxt24"
+        android:layout_toEndOf="@+id/winetittler"
+        android:text="RESET Liftingarm" />
 
-	<SeekBar
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:id="@+id/speedSlider"
-		android:layout_below="@+id/gamepad"
-		android:layout_alignParentStart="true"
-		android:max="1500"
-		android:indeterminate="false" />
+    <ImageView
+        android:id="@+id/stalled1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/greenlight" />
 
-	<TextView
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:textAppearance="?android:attr/textAppearanceLarge"
-		android:text="Speed"
-		android:id="@+id/textView"
-		android:layout_below="@+id/speedSlider"
-		android:layout_alignParentStart="true"
-		android:layout_marginRight="20dp" />
+    <ImageView
+        android:id="@+id/stalled2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/stalled1"
+        android:src="@drawable/greenlight" />
 
-	<TextView
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:textAppearance="?android:attr/textAppearanceLarge"
-		android:text="0"
-		android:id="@+id/speedTextView"
-		android:layout_below="@+id/speedSlider"
-		android:layout_toEndOf="@+id/textView" />
-	<SeekBar
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:id="@+id/linaccSlider"
-		android:layout_below="@+id/textView"
-		android:layout_alignParentStart="true"
-		android:max="90"
-		android:indeterminate="false" />
-	<Button
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:text="NXT24"
-		android:id="@+id/nxt24"
-		android:layout_above="@+id/mMessage"
-		android:layout_alignParentStart="true" />
+    <ImageView
+        android:id="@+id/stalled3"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/stalled2"
+        android:src="@drawable/greenlight" />
 
-	<Button
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:text="WineTittler"
-		android:id="@+id/winetittler"
-		android:layout_alignTop="@+id/nxt24"
-		android:layout_toEndOf="@+id/nxt24" />
+    <ImageView
+        android:id="@+id/stalled4"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/stalled3"
+        android:src="@drawable/greenlight" />
+
+    <ImageView
+        android:id="@+id/liftingarmreset"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/greenlight"
+        android:layout_alignParentTop="true"
+        android:layout_alignEnd="@+id/linacclayout"
+        android:layout_alignParentRight="true" />
+
+    <TextView
+        android:id="@+id/mMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_column="1"
+        android:layout_gravity="top"
+        android:layout_toRightOf="@id/gamepad"
+        android:layout_toStartOf="@+id/textView2"
+        android:gravity="center_horizontal"
+        android:padding="20dp"
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/batteryVoltage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0V"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_below="@+id/stalled1"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/auxBatteryVoltage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/batteryVoltage"
+        android:text="0V"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Robot Rotation"
+        android:layout_below="@+id/linaccSlider"
+        android:layout_alignStart="@+id/turn"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:id="@+id/info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mMessage"
+        android:layout_column="1"
+        android:layout_gravity="top"
+        android:layout_toRightOf="@id/gamepad"
+        android:layout_toStartOf="@+id/textView2"
+        android:gravity="center_horizontal"
+        android:padding="20dp"
+        android:text="Info"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    <TextView
+        android:id="@+id/infoip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/info"
+        android:layout_column="1"
+        android:layout_gravity="top"
+        android:layout_toRightOf="@id/gamepad"
+        android:layout_toStartOf="@+id/textView2"
+        android:gravity="center_horizontal"
+        android:padding="20dp"
+        android:text="IP"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    <TextView
+        android:id="@+id/msg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/infoip"
+        android:layout_column="1"
+        android:layout_gravity="top"
+        android:layout_toRightOf="@id/gamepad"
+        android:layout_toStartOf="@+id/textView2"
+        android:gravity="center_horizontal"
+        android:padding="20dp"
+        android:text="Message"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout><!-- From: file:/C:/Users/leo/Android%20Studio%20Projects/Smatttabs/leJOS-Droid/res/layout/rc_nav_control.xml -->

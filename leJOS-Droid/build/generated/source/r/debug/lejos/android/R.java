@@ -12,24 +12,45 @@ public final class R {
     }
     public static final class drawable {
         public static final int controllermitte=0x7f020000;
-        public static final int controllerrand=0x7f020001;
-        public static final int icon=0x7f020002;
+        public static final int controllermittesmall=0x7f020001;
+        public static final int controllerrand=0x7f020002;
+        public static final int greenlight=0x7f020003;
+        public static final int icon=0x7f020004;
+        public static final int redlight=0x7f020005;
     }
     public static final class id {
+        public static final int auxBatteryVoltage=0x7f06001c;
+        public static final int batteryVoltage=0x7f06001b;
         public static final int button3=0x7f060001;
         public static final int gamepad=0x7f060006;
         public static final int hello=0x7f060000;
+        public static final int info=0x7f06001d;
+        public static final int infoip=0x7f06001e;
         public static final int knob=0x7f060007;
-        public static final int linaccSlider=0x7f06000b;
-        public static final int mMessage=0x7f060005;
+        public static final int liftingarmreset=0x7f060019;
+        public static final int linaccSlider=0x7f060011;
+        public static final int linacclayout=0x7f06001a;
+        public static final int linaccspeedslider=0x7f06000d;
+        public static final int linacspeedtext=0x7f06000f;
+        public static final int linactext=0x7f06000e;
+        public static final int mMessage=0x7f060010;
         public static final int messageText=0x7f060002;
-        public static final int nxt24=0x7f06000c;
+        public static final int msg=0x7f06001f;
+        public static final int nxt24=0x7f060012;
+        public static final int resetliftingarm=0x7f060014;
         public static final int root=0x7f060003;
         public static final int speedSlider=0x7f060008;
-        public static final int speedTextView=0x7f06000a;
-        public static final int textView=0x7f060009;
-        public static final int vl=0x7f060004;
-        public static final int winetittler=0x7f06000d;
+        public static final int speedTextView=0x7f060009;
+        public static final int stalled1=0x7f060015;
+        public static final int stalled2=0x7f060016;
+        public static final int stalled3=0x7f060017;
+        public static final int stalled4=0x7f060018;
+        public static final int textView=0x7f060005;
+        public static final int textView2=0x7f06000a;
+        public static final int textView3=0x7f06000c;
+        public static final int textView4=0x7f06000b;
+        public static final int turn=0x7f060004;
+        public static final int winetittler=0x7f060013;
     }
     public static final class layout {
         public static final int main=0x7f030000;
